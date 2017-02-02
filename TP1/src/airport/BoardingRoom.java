@@ -1,14 +1,16 @@
 package airport;
 
-public class BoardingRoom {
+class BoardingRoom {
     private int id;
+    private Boolean isFree;
 
     public BoardingRoom(){
         id = 0;
     }
 
-    public BoardingRoom(int id){
+    public BoardingRoom(int id, Boolean isFree){
         this.id = id;
+        this.isFree = isFree;
     }
 
     public int getId() {
@@ -17,5 +19,13 @@ public class BoardingRoom {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Boolean getFree() {
+        return isFree;
+    }
+
+    public void setFree(Boolean free) {
+        isFree = free;
     }
 }
