@@ -31,10 +31,10 @@ class Arrival extends Thread {
             if(type == QUICK) semBoardingRoom.acquire();
             semGateway.acquire();
 
-            try {
-                Gateway gatewayDeparture = null;
-                BoardingRoom boardingRoomDeparture = null;
+            Gateway gatewayDeparture = null;
+            BoardingRoom boardingRoomDeparture = null;
 
+            try {
                 synchronized (gateways) {
                     for (Gateway gateway : gateways) {
                         if (gateway.getFree()) {
@@ -63,14 +63,14 @@ class Arrival extends Thread {
                 if (type == QUICK)
                     System.out.println("# " + flight.getId() + " / Boarding Room : " + boardingRoomDeparture.getId());
 
-                gatewayDeparture.setFree(true);
-                if (type == QUICK) boardingRoomDeparture.setFree(true);
-
                 System.out.println("# " + flight.getId() + " / Libere Gateway : " + gatewayDeparture.getId());
                 if (type == QUICK)
                     System.out.println("# " + flight.getId() + " / Libere Boarding Room : " + boardingRoomDeparture.getId());
             }
             finally {
+                if(gatewayDeparture != null) gatewayDeparture.setFree(true);
+                if (boardingRoomDeparture != null && type == QUICK) boardingRoomDeparture.setFree(true);
+
                 semGateway.release();
                 if(type == QUICK) semBoardingRoom.release();
             }

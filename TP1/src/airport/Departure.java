@@ -27,10 +27,10 @@ public class Departure extends Thread {
             semBoardingRoom.acquire();
             semGateway.acquire();
 
-            try {
-                Gateway gatewayDeparture = null;
-                BoardingRoom boardingRoomDeparture = null;
+            Gateway gatewayDeparture = null;
+            BoardingRoom boardingRoomDeparture = null;
 
+            try {
                 synchronized (boardingRooms) {
                     for (BoardingRoom boardingRoom : boardingRooms) {
                         if (boardingRoom.getFree()) {
@@ -56,13 +56,13 @@ public class Departure extends Thread {
                 System.out.println("# " + flight.getId() + " / Boarding Room : " + boardingRoomDeparture.getId());
                 System.out.println("# " + flight.getId() + " / Gateway : " + gatewayDeparture.getId());
 
-                boardingRoomDeparture.setFree(true);
-                gatewayDeparture.setFree(true);
-
                 System.out.println("# " + flight.getId() + " / Libere Boarding Room : " + boardingRoomDeparture.getId());
                 System.out.println("# " + flight.getId() + " / Libere Gateway : " + gatewayDeparture.getId());
             }
             finally {
+                if(boardingRoomDeparture != null) boardingRoomDeparture.setFree(true);
+                if(gatewayDeparture != null) gatewayDeparture.setFree(true);
+
                 semGateway.release();
                 semBoardingRoom.release();
             }

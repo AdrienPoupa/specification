@@ -48,3 +48,17 @@ public class AirportManagement {
         }
     }
 }
+
+/*
+ * On utillise deux sémaphores une pour les salles d'attente initialisée à 4 et une pour les portes initialisée à 3.
+ * Chaque thread fera ensuite un acquire sur ces deux sémaphores ce qui garantira qu'il pourra avoir accès à toutes les
+ * ressources nécessaires.
+ *
+ * L'ordre des acquire est également le même pour chaque thread ce qui permet d'éviter les situations où 2 threads
+ * acquiert chacun respectivement la dernière porte et la dernière salle puis demande ensuite à acquérir une salle et
+ * porte ce qui donnerait une deadlock
+ *
+ * Au niveau des deadlocks, si jamais dans le code des threads, après l'acquisition des ressources une exception est
+ * levée empêchant l'exécution complète nous avons placé les releases des sempahores dans une clause finally pour être
+ * sûr que toutes les ressources soient bien libérées
+ */
