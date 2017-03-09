@@ -33,7 +33,7 @@ public class AirportManagement {
         Random randDepartureOrArrival = new Random();
         Random randArrivalNormalOrQuick = new Random();
 
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 10000; i++){
             Flight flight = new Flight(i);
 
             if(randDepartureOrArrival.nextBoolean()) { //Departure
@@ -61,4 +61,14 @@ public class AirportManagement {
  * Au niveau des deadlocks, si jamais dans le code des threads, après l'acquisition des ressources une exception est
  * levée empêchant l'exécution complète nous avons placé les releases des sempahores dans une clause finally pour être
  * sûr que toutes les ressources soient bien libérées
+ *
+ * Dans ce programme, on pourra obtenir une deadlock dans le cas où les 4 salles d'embarquement sont réservées pour les
+ * départs et que pendant le temps d'attente, 3 vols avec escale réservent les portes.
+ *
+ * On génère le reacability graph et avec l'outil salt on teste les propriétés.
+ *  - On essaie de savoir s'il n'y a jamais de deadlock : - <> dead (non eventually dead), le programme trouve un contre
+ *    exemple, il y a donc deadlock
+ *
+ * On change le cahier des charges pour résoudre ce problème :
+ *  - A l'embarquement, on réserve en même temps la salle et la porte
  */
