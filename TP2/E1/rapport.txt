@@ -1,0 +1,10 @@
+4) 
+
+On peut voir que à l'état 4, il n'y a aucune transition possible
+
+state 4
+props p2 q2
+trans
+
+5) selt TP2.1.4.ktz -f "- <> dead"
+

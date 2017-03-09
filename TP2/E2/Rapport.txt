@@ -1,0 +1,21 @@
+4)
+
+a) 
+
+G <> vert1 /\ vert2
+
+selt TP2.2.4.ktz -f "<> vert1 /\ vert2"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 6 states, 6 transitions
+0.000s
+TRUE
+0.000s
+
+b) - <> rouge1 => () vert1 \/ rouge2 => () vert2
+
+selt TP2.2.4.ktz -f "- <> rouge1 => () vert1 \/ rouge2 => () vert2"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 6 states, 6 transitions
+0.000s
+TRUE
+0.031s
