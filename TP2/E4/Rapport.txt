@@ -1,0 +1,25 @@
+2) Un Petri Net est borné si et seulement si son graphe des marquages est fini. 
+Dans notre cas, le graphe des marquages n'est pas fini et ne peut donc pas être représenté. 
+De plus, en générant le graphe de couverture, on voit qu'il retourne "bounded: No", donc 
+ce Petri Net n'est pas borné.
+
+3) Le symbole w représente ici le nombre de clients dont s'est occupé le barbier
+
+state 27
+props Arrive Busy Leave*w WaitingRoom*2
+trans t5/25 t3/26 t6/27
+
+
+5) 
+ * y a-t-il un deadlock : "- <> dead"
+
+selt TP2.4.5.ktz -f "- <> dead"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 12 states, 23 transitions
+0.000s
+TRUE
+0.000s
+
+ * Si le barbier est libre et la salle d'attente vide, il peut être servi immédiatement
+
+ * Si le barbier est occupé, il n'accepte pas de client avant d'être à nouveau libre
