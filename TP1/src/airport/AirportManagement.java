@@ -33,7 +33,7 @@ public class AirportManagement {
         Random randDepartureOrArrival = new Random();
         Random randArrivalNormalOrQuick = new Random();
 
-        for(int i = 0; i < 10000; i++){
+        for(int i = 0; i < 6; i++){
             Flight flight = new Flight(i);
 
             if(randDepartureOrArrival.nextBoolean()) { //Departure
