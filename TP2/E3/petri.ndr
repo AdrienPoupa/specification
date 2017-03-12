@@ -1,0 +1,32 @@
+t 70.0 360.0 end_read e 0 w n {} ne
+t 70.0 95.0 reader_arrival e 0 w n {} ne
+t 375.0 355.0 end_write w 0 w n {} ne
+t 375.0 215.0 start_write w 0 w n {} ne
+p 375.0 155.0 wait_writer 0 w
+t 375.0 95.0 writer_arrival w 0 w n {} ne
+p 375.0 30.0 writer 3 w
+p 225.0 150.0 lock 6 n
+p 70.0 30.0 reader 6 e
+p 70.0 160.0 wait_reader 0 e
+t 70.0 220.0 start_read e 0 w n {} ne
+p 375.0 285.0 write 0 w
+p 70.0 295.0 read 0 e
+e lock start_write 6 n
+e end_write 0.436086472 79.30952024 lock 0.7951672353 75.0 6 n
+e end_write 0.03837507038 62.8171951 writer 0.884047847 87.11486667 1 n
+e wait_writer start_write 1 n
+e writer_arrival wait_writer 1 n
+e writer writer_arrival 1 n
+e end_read 0.4487918088 63.24555317 reader 0.5493996901 55.65968019 1 n
+e wait_reader start_read 1 n
+e reader_arrival wait_reader 1 n
+e reader reader_arrival 1 n
+e end_read 0.07379180882 62.60990337 lock 0.7140609546 75.92759709 1 n
+e lock start_read 1 n
+e start_read read 1 n
+e read end_read 1 n
+e start_write write 1 n
+e write end_write 1 n
+h petri
+
+

@@ -9,20 +9,11 @@ state 27
 props Arrive Busy Leave*w WaitingRoom*2
 trans t5/25 t3/26 t6/27
 
-
-5) 
- * y a-t-il un deadlock : "- <> dead"
-
-selt TP2.4.5.ktz -f "- <> dead"
-Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
-ktz loaded, 12 states, 23 transitions
-0.000s
-TRUE
-0.000s
+6)
 
  * Si le barbier est libre et la salle d'attente vide, il peut être servi immédiatement
 
-selt TP2.4.5.ktz -f "([]((Arrive /\ (- WaitingRoom) /\ Free) => ()(Busy)))"
+selt TP2.4.5.ktz -f "[]((Arrive /\ (- WaitingRoom) /\ Free) => <>Busy)"
 Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
 ktz loaded, 12 states, 23 transitions
 0.000s
@@ -31,16 +22,16 @@ TRUE
 
  * Si le barbier est occupé, il n'accepte pas de client avant d'être à nouveau libre
 
-selt TP2.4.5.ktz -f "([]Busy => - Free)
+selt TP2.4.5.ktz -f "[](Busy => <>((-Free) U Busy))"
 Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
 ktz loaded, 12 states, 23 transitions
 0.000s
 TRUE
-0.000s
+0.016s
 
  * Si la salle d'attente est pleine, le client part
 
-selt TP2.4.5.ktz -f "([]( - p7) => ()p0)"
+selt TP2.4.5.ktz -f "[](( - p7) => <>p0)"
 Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
 ktz loaded, 12 states, 23 transitions
 0.000s
