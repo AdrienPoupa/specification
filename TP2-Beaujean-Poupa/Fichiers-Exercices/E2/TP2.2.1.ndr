@@ -1,0 +1,15 @@
+p 190.0 125.0 vert 0 e
+p 190.0 270.0 orange 0 e
+t 190.0 350.0 t2 0 w n
+p 70.0 190.0 rouge 1 w
+t 190.0 25.0 t0 0 w n
+t 190.0 195.0 t1 0 w n
+e rouge t0 1 n
+e t2 rouge 1 n
+e orange t2 1 n
+e t1 orange 1 n
+e vert t1 1 n
+e t0 vert 1 n
+h {TP2.2.1}
+
+

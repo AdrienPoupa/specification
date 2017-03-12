@@ -1,0 +1,86 @@
+2)
+
+Il y a 133 places et 16 arrêtes
+
+3)
+
+(a) Place lock is 5-bounded.
+
+[] (lock <= 5)
+
+selt petri.ktz -f "[] (lock <= 5)"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 133 states, 410 transitions
+0.000s
+FALSE
+  state 0: lock*6 reader*6 writer*3
+  -reader_arrival ... (preserving T)->
+  state 72: lock*6 reader*6 wait_writer*3
+  -reader_arrival ... (preserving - (5 >= lock))->
+  state 80: lock*6 reader*5 wait_reader wait_writer*3
+  [accepting all]
+0.000s
+
+Cette expression est fausse car plusieurs états (0,72,80) contiennent plus de 5 jetons
+
+(b) Reading and writing in the database are mutually exclusive.
+
+[] - (read /\ write)
+
+selt petri.ktz -f "[] - (read /\ write)"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 133 states, 410 transitions
+0.000s
+TRUE
+0.000s
+
+(c) At most, 5 five reader can read simultaneously in the database.
+
+[] (read <= 5)
+
+selt petri.ktz -f "[] (read <= 5)"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 133 states, 410 transitions
+0.000s
+FALSE
+  state 0: lock*6 reader*6 writer*3
+  -reader_arrival ... (preserving T)->
+  state 88: read*6 wait_writer*3
+  -end_read ... (preserving - (5 >= read))->
+  state 89: lock read*5 reader wait_writer*3
+  [accepting all]
+0.000s
+
+Cette expression est fausse car on peut avoir à plusieurs reprises 6 lecteurs en même temps
+
+(d) Any reader arrival will be followed a read.
+
+[] (reader_arrival => <> read)
+
+selt petri.ktz -f "[] (reader_arrival => <> read)"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 133 states, 410 transitions
+0.000s
+FALSE
+  state 0: lock*6 reader*6 writer*3
+  -writer_arrival ... (preserving T)->
+  state 29: lock*6 reader wait_reader*5 wait_writer*3
+  -reader_arrival ... (preserving - read /\ reader_arrival)->
+* [accepting] state 30: lock*6 wait_reader*6 wait_writer*3
+  -start_write ... (preserving - read)->
+  state 30: lock*6 wait_reader*6 wait_writer*3
+0.000s
+
+Cette expression est fausse. En effet, au moment où un lecteur arrive, il peut y avoir pénurie, par exemple si un écrivain est en train
+de faire des modifications.
+
+(e) Any reading start will be followed by a reading end.
+
+[] (start_read => <> end_read)
+
+selt petri.ktz -f "[] (start_read => <> end_read)"
+Selt version 3.4.4 -- 01/05/16 -- LAAS/CNRS
+ktz loaded, 133 states, 410 transitions
+0.000s
+TRUE
+0.000s
