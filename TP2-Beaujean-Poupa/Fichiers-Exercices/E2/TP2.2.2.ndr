@@ -1,0 +1,33 @@
+p 195.0 125.0 vert1 0 e
+p 195.0 270.0 orange1 0 e
+t 195.0 350.0 t3a 0 w n
+p 75.0 190.0 rouge1 1 w
+t 195.0 195.0 t2a 0 w n
+t 465.0 25.0 t1b 0 w n
+p 465.0 105.0 vert2 1 w
+t 465.0 190.0 t2b 0 w n
+p 465.0 275.0 orange2 0 w
+t 465.0 350.0 t3b 0 w n
+p 600.0 185.0 rouge2 0 e
+t 195.0 25.0 t1a 0 w n
+p 325.0 225.0 s2 0 n
+p 325.0 125.0 s1 0 n
+e s2 t1b 1 n
+e t3a s2 1 n
+e s1 t1a 1 n
+e t3b s1 1 n
+e t1a vert1 1 n
+e vert1 t2a 1 n
+e t2a orange1 1 n
+e orange1 t3a 1 n
+e t3a rouge1 1 n
+e rouge1 t1a 1 n
+e rouge2 t1b 1 n
+e t3b rouge2 1 n
+e orange2 t3b 1 n
+e t2b orange2 1 n
+e vert2 t2b 1 n
+e t1b vert2 1 n
+h {TP2.2.2}
+
+
