@@ -1,0 +1,13 @@
+LTL formula
+
+deadlock freeness :
+- <> dead
+
+Eventualy examined by a doctor :
+<> 
+
+Each time a room is taken it will be eventually released :
+G(t7 => F checkout)
+
+[](t7 => () checkout)
+

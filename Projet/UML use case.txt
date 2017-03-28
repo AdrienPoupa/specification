@@ -1,0 +1,10 @@
+Uses cases :
+
+Emergency services :
+	- Remplissage papier patient
+	- Prise en charge du patient
+
+	
+Service provider : 
+	- Un service demande de l'aide
+	- Un service n'a plus aucuns patients
