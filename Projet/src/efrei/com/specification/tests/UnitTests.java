@@ -10,21 +10,19 @@ import org.junit.Test;
 
 /**
  * Unit tests
+ * Isol 1 classe
  */
 public class UnitTests {
     private Patient patient;
-    private EmergencyRoom emergencyRoom;
 
     @Before
     public void setUp() throws Exception {
         patient = new Patient();
-        emergencyRoom = new EmergencyRoom();
     }
 
     @After
     public void tearDown() throws Exception {
         patient = null;
-        emergencyRoom = null;
     }
 
     @Test
@@ -34,8 +32,8 @@ public class UnitTests {
     }
 
     @Test
-    public void testEmergencyRoom() {
-        patient.enterEmergencyRoom(emergencyRoom);
-        Assert.assertEquals(patient.getEmergencyRoom(), emergencyRoom);
+    public void testBirthDate() {
+        patient.setBirthDate("01/01/1985");
+        Assert.assertEquals("01/01/1985", "01/01/1985", patient.getBirthDate());
     }
 }
