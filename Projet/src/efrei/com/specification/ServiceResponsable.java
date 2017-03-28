@@ -7,4 +7,8 @@ public class ServiceResponsable extends HospitalStaff {
     public void askForMoreResource() {
         ResourceProvider.offerResource();
     }
+
+    public void releaseResource() {
+        ResourceProvider.takeResource();
+    }
 }
