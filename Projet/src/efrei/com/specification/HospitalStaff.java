@@ -1,7 +1,8 @@
 package efrei.com.specification;
 
 /**
- * Main class which all hospital staff inherit from
+ * Hospital class which all hospital staff inherit from
  */
-public class HospitalStaff {
+public class HospitalStaff extends Person {
+    protected int seniority;
 }
