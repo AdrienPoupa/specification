@@ -7,42 +7,40 @@ import java.util.List;
  * Created by Adrien on 28/03/2017.
  */
 public class Hospital {
-    static List<Patient> patientList;
-
-    public Hospital() {
-        patientList = new ArrayList<>();
-    }
-
-    public static List<Patient> getPatientList() {
-        return patientList;
-    }
-
-    public void setPatientList(List<Patient> patientList) {
-        this.patientList = patientList;
-    }
-
     public static void main(String[] args) {
         System.out.println("Welcome to the hospital");
 
-        patientList = new ArrayList<>();
+        Patient testPatient = new Patient();
+        testPatient.setCheckedIn(true);
+        testPatient.setPaper(true);
+        PatientContainer.add(testPatient);
 
         // Let's draw the roster
         roster();
     }
 
     public static void roster() {
-        System.out.println("Each line represents a patient");
-        String leftAlignFormat = "| %-15s | %-7d | %-14s  | %-10s |%n";
-        String emergencyRoom;
+        String leftAlignFormat = "| %-10s | %-12s | %-7s | %-7s | %-15s | %-14s  | %-10s |%n";
+        String emergencyRoom, examiningRoom, physician, nurse, paper, checkedIn;
 
-        System.out.format("+-----------------+---------+-----------------+------------+%n");
-        System.out.format("| Receptionist    | Nurse   | Emergency room  | Physician  |%n");
-        System.out.format("+-----------------+---------+-----------------+------------+%n");
-        for (Patient p : patientList) {
+        System.out.format("+------------+--------------+---------+---------+-----------------+-----------------+------------+%n");
+        System.out.format("| Patient ID | Receptionist | Paper   | Nurse   | Emergency room  | Examining room  | Physician  |%n");
+        System.out.format("+------------+--------------+---------+---------+-----------------+-----------------+------------+%n");
+        for (Patient p : PatientContainer.getPatientList()) {
+            // Was he admitted in an emergency room?
             emergencyRoom = (p.getEmergencyRoom() == null) ? "X" : "✓";
-            int i = 1;
-            System.out.format(leftAlignFormat, "some data" + i, i * i, emergencyRoom, i*i*i*i);
+            // Was he admitted in an emergency room?
+            examiningRoom = (p.getExaminingRoom() == null) ? "X" : "✓";
+            // Does he have a physician?
+            physician = (p.getPhysician() == null) ? "X" : "✓";
+            // Does he have a paper filled by the nurse?
+            nurse = (!p.isNurseFilled()) ? "X" : "✓";
+            // Does he have a paper filled by the himself?
+            paper = (!p.isPaper()) ? "X" : "✓";
+            // Is he checked in?
+            checkedIn = (!p.isCheckedIn()) ? "X" : "✓";
+            System.out.format(leftAlignFormat, p.getCounter(), checkedIn, paper, nurse, emergencyRoom, examiningRoom, physician);
         }
-        System.out.format("+-----------------+---------+-----------------+------------+%n");
+        System.out.format("+------------+--------------+---------+---------+-----------------+-----------------+------------+%n");
     }
 }

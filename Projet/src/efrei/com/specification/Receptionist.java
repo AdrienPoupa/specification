@@ -4,21 +4,29 @@ package efrei.com.specification;
  * The receptionist
  */
 public class Receptionist extends HospitalStaff {
-    private int count;
+    private static int NUMBER_OF_PATIENTS = 10;
 
-    public void checkResources() {
-        // Call the resource provider
+    public int checkResources() {
+        // Call the resource provider: is there an available emergency room?
+        boolean roomAvailable = ResourceProvider.emergencyRoomAvailable();
+
+        // Compute waiting time
+        return computeWaitingTime(roomAvailable);
     }
 
-    public int getCount() {
-        return count;
-    }
+    private int computeWaitingTime(boolean roomAvailable) {
+        int waitingTime = 0;
 
-    public void setCount(int count) {
-        this.count = count;
-    }
+        if (Patient.getCounter() > NUMBER_OF_PATIENTS) {
+            waitingTime += 1;
+        }
 
-    private void computeWaitingTime() {
+        // if number of current patients > ... and room available
+        // waiting
+        if (roomAvailable){
+            waitingTime += 1;
+        }
 
+        return waitingTime;
     }
 }
