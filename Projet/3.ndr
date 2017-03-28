@@ -18,85 +18,92 @@ p 95.0 275.0 p13 0 n
 t 50.0 360.0 {le deces} s 0 w n {} ne
 p 70.0 140.0 {} 100 n
 p 75.0 475.0 {nb de patients mort} 0 n
-t 295.0 320.0 t0 0 w n
-p 485.0 315.0 p3 0 n
-p 490.0 515.0 p6 0 n
-t 540.0 315.0 t10 0 w n
-t 540.0 380.0 t11 0 w n
-p 485.0 380.0 p4 0 n
-t 430.0 380.0 t3 0 w n
-p 350.0 350.0 p1 0 n
-t 430.0 315.0 t2 0 w n
-p 485.0 445.0 p5 0 n
-t 430.0 445.0 t5 0 w n
-t 430.0 515.0 t9 0 w n
-t 540.0 515.0 t13 0 w n
-t 540.0 445.0 t12 0 w n
-p 350.0 490.0 p2 0 n
-t 300.0 425.0 t1 0 w n
-p 190.0 425.0 p0 0 n
-p 890.0 390.0 p7 10 n
-p 920.0 480.0 p8 11 n
+p 475.0 405.0 p3 0 n
+p 480.0 605.0 p6 0 n
+t 530.0 405.0 t10 0 w n
+t 530.0 470.0 t11 0 w n
+p 475.0 470.0 p4 0 n
+t 420.0 470.0 t3 0 w n
+p 340.0 440.0 p1 0 n
+t 420.0 405.0 t2 0 w n
+p 475.0 535.0 p5 0 n
+t 420.0 535.0 t5 0 w n
+t 420.0 605.0 t9 0 w n
+t 530.0 605.0 t13 0 w n
+t 530.0 535.0 t12 0 w n
+p 340.0 580.0 p2 0 n
+p 880.0 480.0 p7 10 n
+p 910.0 570.0 p8 11 n
 p 575.0 200.0 {Room available} 3 w
-t 1155.0 355.0 t17 0 w n
-t 1135.0 490.0 t18 0 w n
-e compteur t18 2 n
-e {Room available} t18 1 n
-e t18 0.4671439677 195.1435369 compteur 0.9497298428 201.2034107 2 n
-e t18 p8 1 n
-e t17 p7 1 n
-e t17 compteur 2 n
-e compteur 0.9422992936 186.096749 t17 0.5044445131 179.0698188 2 n
-e Physician t17 1 n
-e t12 0.07087186229 48.75448697 {Room available} 0.9838157166 49.25444142 1 n
-e p7 0.5656371604 104.7854952 t3 0.8370241469 53.85164807 ?-1 n
-e p7 0.4863135835 116.4302366 t2 0.8548522372 39.20459157 1 n
-e p8 0.5535834617 127.1377206 t9 0.7808158973 51.97114584 ?-1 n
-e p8 0.4886510645 122.8121024 t5 0.7681105605 35.22782991 1 n
-e p6 t13 1 n
-e p5 t12 1 n
-e t9 p6 1 n
-e t5 p5 1 n
-e p2 t9 1 n
-e p2 t5 1 n
-e p4 t11 1 n
-e t10 Physician 1 n
-e p3 t10 1 n
-e t3 p4 1 n
-e t2 p3 1 n
-e p1 t3 1 n
-e p1 t2 1 n
-e t1 p2 1 n
-e t1 p1 1 n
-e p0 t1 1 n
-e t0 p0 1 n
-e compteur t0 ?-1 n
-e {} {patient arrive} 1 n
-e {patient arrive} {check in} 1 n
-e {check in} t4 1 n
-e t4 paper 1 n
-e compteur t4 1 n
-e paper t6 1 n
-e t6 wait 1 n
-e Nurse t6 1 n
-e t6 compteur 1 n
-e wait t7 1 n
-e {Room available} t7 1 n
-e t7 {examining room} 1 n
-e {examining room} t8 1 n
-e t8 treatment 1 n
-e Physician t8 1 n
-e treatment {check out} 1 n
-e {check out} Physician 1 n
-e {check out} 0.7315763486 129.8691649 {Room available} 0.852934801 122.8006515 1 n
-e t7 0.3074289577 56.64803613 Nurse 0.9875912252 64.19501537 1 n
-e {check in} t14 1 n
-e compteur t14 ?-1 n
-e t15 {} 1 n
-e t14 p13 1 n
-e p13 {le deces} 1 n
-e p13 0.3462248542 66.85057965 t15 0.7167329654 67.46851117 1 n
+t 1145.0 445.0 t17 0 w n
+t 1125.0 580.0 t18 0 w n
+t 285.0 520.0 t1 0 w n
+t 190.0 375.0 b0 0 w n
+p 190.0 470.0 p0 0 s
+p 335.0 350.0 buffer 1 n
+e t18 buffer 1 n
+e t17 buffer 1 n
+e buffer t18 1 n
+e buffer t17 1 n
+e t1 buffer 1 n
+e buffer b0 1 n
 e {le deces} {nb de patients mort} 1 n
+e p13 0.3462248542 66.85057965 t15 0.7167329654 67.46851117 1 n
+e p13 {le deces} 1 n
+e t14 p13 1 n
+e t15 {} 1 n
+e compteur t14 ?-1 n
+e {check in} t14 1 n
+e t7 0.3074289577 56.64803613 Nurse 0.9875912252 64.19501537 1 n
+e {check out} 0.7315763486 129.8691649 {Room available} 0.852934801 122.8006515 1 n
+e {check out} Physician 1 n
+e treatment {check out} 1 n
+e Physician t8 1 n
+e t8 treatment 1 n
+e {examining room} t8 1 n
+e t7 {examining room} 1 n
+e {Room available} t7 1 n
+e wait t7 1 n
+e t6 compteur 1 n
+e Nurse t6 1 n
+e t6 wait 1 n
+e paper t6 1 n
+e compteur t4 1 n
+e t4 paper 1 n
+e {check in} t4 1 n
+e {patient arrive} {check in} 1 n
+e {} {patient arrive} 1 n
+e compteur b0 ?-1 n
+e b0 p0 1 n
+e p0 t1 1 n
+e t1 p1 1 n
+e t1 p2 1 n
+e p1 t2 1 n
+e p1 t3 1 n
+e t2 p3 1 n
+e t3 p4 1 n
+e p3 t10 1 n
+e t10 Physician 1 n
+e p4 t11 1 n
+e p2 t5 1 n
+e p2 t9 1 n
+e t5 p5 1 n
+e t9 p6 1 n
+e p5 t12 1 n
+e p6 t13 1 n
+e p8 0.4886510645 122.8121024 t5 0.7681105609 35.22782992 1 n
+e p8 0.5535834617 127.1377206 t9 0.7808158973 51.97114584 ?-1 n
+e p7 0.4863135839 116.4302366 t2 0.8548522372 39.20459157 1 n
+e p7 0.5656371608 104.7854952 t3 0.8370241469 53.85164807 ?-1 n
+e t12 0.07087186229 48.75448697 {Room available} 0.9838157166 49.25444142 1 n
+e Physician t17 1 n
+e compteur 0.9422992936 186.096749 t17 0.5044445131 179.0698188 2 n
+e t17 compteur 2 n
+e t17 p7 1 n
+e t18 p8 1 n
+e t18 0.4671439678 195.1435369 compteur 0.9497298435 201.2034107 2 n
+e {Room available} t18 1 n
+e compteur t18 2 n
 h 3
 
 
