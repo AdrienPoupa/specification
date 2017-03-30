@@ -13,29 +13,20 @@ public class ValidationTests {
     private Receptionist receptionist;
     private Patient patient;
     private Physician physician;
-    private PhysicianContainer physicianContainer;
     private Nurse nurse;
-    private NurseContainer nurseContainer;
     private EmergencyRoom emergencyRoom;
-    private EmergencyRoomContainer emergencyRoomContainer;
     private ExaminingRoom examiningRoom;
-    private ExaminingRoomContainer examiningRoomContainer;
+    private ServiceResponsable serviceResponsable;
 
     @Before
     public void setUp() throws Exception {
         receptionist = Receptionist.getInstance();
+        serviceResponsable = ServiceResponsable.getInstance();
         patient = new Patient();
         physician = new Physician();
         nurse = new Nurse();
         emergencyRoom = new EmergencyRoom();
-        emergencyRoomContainer = new EmergencyRoomContainer();
         examiningRoom = new ExaminingRoom();
-        examiningRoomContainer = new ExaminingRoomContainer();
-
-        emergencyRoom.setAvailable(true);
-        examiningRoom.setAvailable(true);
-        nurse.setAvailable(true);
-        physician.setAvailable(true);
 
         EmergencyRoomContainer.add(emergencyRoom);
         ExaminingRoomContainer.add(examiningRoom);
@@ -45,15 +36,17 @@ public class ValidationTests {
 
     @After
     public void tearDown() throws Exception {
+        serviceResponsable = null;
         receptionist = null;
         patient = null;
         physician = null;
         emergencyRoom = null;
-        emergencyRoomContainer = null;
         examiningRoom = null;
-        examiningRoomContainer = null;
     }
 
+    /**
+     * Run a whole scenario: a patient walks in the hospital
+     */
     @Test
     public void testValidation() {
         // The patient checks in
@@ -101,5 +94,34 @@ public class ValidationTests {
         Assert.assertNull(patient.getNurse());
         Assert.assertNull(patient.getReceptionist());
         Assert.assertNull(patient.getEmergencyRoom());
+    }
+
+    /**
+     * Validate responsible's actions
+     */
+    @Test
+    public void testServiceResponsableAskResource() {
+        int countBeforeAsk = Physician.getCounter();
+        int countBeforeAskList = PhysicianContainer.getPhysicianList().size();
+
+        // Ask for more resources
+        serviceResponsable.askForMoreResource();
+
+        // Now we should have 2 more physicians
+        Assert.assertEquals(Physician.getCounter(), countBeforeAsk + 3);
+        Assert.assertEquals(PhysicianContainer.getPhysicianList().size(), countBeforeAskList + 3);
+    }
+
+    /**
+     * Validate responsible's actions
+     */
+    @Test
+    public void testServiceResponsableReleaseResource() {
+        // Release resources
+        serviceResponsable.releaseResource();
+
+        // We release everybody since everybody is available
+        Assert.assertEquals(Nurse.getCounter(), 0);
+        Assert.assertEquals(NurseContainer.getNurseList().size(), 0);
     }
 }

@@ -9,10 +9,39 @@ public class Patient extends Person {
     private Nurse nurse;
     private Physician physician;
     private Receptionist receptionist;
-    private static int MAX_WAITING_TIME = 1;
+    private static int MAX_WAITING_TIME = 2;
     private boolean paper = false;
     private boolean nurseFilled = false;
     private boolean examined = false;
+    private boolean enteredEmergencyRoom = false;
+    private boolean enteredExaminingRoom = false;
+    private boolean wait = false;
+    private static int counter;
+    private int id;
+
+    public boolean isWait() {
+        return wait;
+    }
+
+    public void setWait(boolean wait) {
+        this.wait = wait;
+    }
+
+    public boolean isEnteredEmergencyRoom() {
+        return enteredEmergencyRoom;
+    }
+
+    public void setEnteredEmergencyRoom(boolean enteredEmergencyRoom) {
+        this.enteredEmergencyRoom = enteredEmergencyRoom;
+    }
+
+    public boolean isEnteredExaminingRoom() {
+        return enteredExaminingRoom;
+    }
+
+    public void setEnteredExaminingRoom(boolean enteredExaminingRoom) {
+        this.enteredExaminingRoom = enteredExaminingRoom;
+    }
 
     public boolean isExamined() {
         return examined;
@@ -24,10 +53,6 @@ public class Patient extends Person {
 
     public ExaminingRoom getExaminingRoom() {
         return examiningRoom;
-    }
-
-    public void setExaminingRoom(ExaminingRoom examiningRoom) {
-        this.examiningRoom = examiningRoom;
     }
 
     public boolean isNurseFilled() {
@@ -49,8 +74,6 @@ public class Patient extends Person {
     public static int getCounter() {
         return counter;
     }
-
-    private static int counter;
 
     public Receptionist getReceptionist() {
         return receptionist;
@@ -93,23 +116,36 @@ public class Patient extends Person {
     }
 
     public void enterEmergencyRoom(EmergencyRoom emergencyRoom) {
-        emergencyRoom.setAvailable(false);
+        // Emergency room  not available if number of patients exceeded
+        if (Patient.getCounter() > Receptionist.NUMBER_OF_PATIENTS) {
+            emergencyRoom.setAvailable(false);
+        }
+
+        setEnteredEmergencyRoom(true);
         this.emergencyRoom = emergencyRoom;
     }
 
     public void leaveEmergencyRoom() {
-        this.emergencyRoom.setAvailable(true);
+        // Emergency room  not available if number of patients exceeded
+        if (Patient.getCounter() < Receptionist.NUMBER_OF_PATIENTS) {
+            emergencyRoom.setAvailable(true);
+        }
         this.emergencyRoom = null;
     }
 
     public void enterExaminingRoom(ExaminingRoom examiningRoom) {
         examiningRoom.setAvailable(false);
+        setEnteredExaminingRoom(true);
         this.examiningRoom = examiningRoom;
     }
 
     public void leaveExaminingRoom() {
         this.examiningRoom.setAvailable(true);
         this.examiningRoom = null;
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**
@@ -121,6 +157,7 @@ public class Patient extends Person {
 
         // +1 patient in the hospital
         counter++;
+        id = counter;
 
         setCheckedIn(true);
 
@@ -129,6 +166,7 @@ public class Patient extends Person {
 
         // Waiting time too long: we won't enter the emergency room
         if (waitingTime > MAX_WAITING_TIME) {
+            setWait(true);
             return;
         }
 
@@ -136,12 +174,17 @@ public class Patient extends Person {
         if (ResourceProvider.emergencyRoomAvailable()) {
             enterEmergencyRoom(ResourceProvider.getEmergencyRoomAvailable());
         }
+        else {
+            setWait(true);
+        }
     }
 
     /**
      * Leave the hospital
      */
     public void checkOut() {
+        leaveEmergencyRoom();
+        leaveExaminingRoom();
         receptionist = null;
         physician = null;
         nurse = null;
@@ -168,11 +211,17 @@ public class Patient extends Person {
         // Enter the free room
         if (ResourceProvider.examiningRoomAvailable()) {
             enterExaminingRoom(ResourceProvider.getExaminingRoomAvailable());
-        }
 
-        // Get a doctor
-        if (ResourceProvider.physicianAvailable()) {
-            setPhysician(ResourceProvider.getPhysicianAvailable());
+            // Get a doctor
+            if (ResourceProvider.physicianAvailable()) {
+                setPhysician(ResourceProvider.getPhysicianAvailable());
+            }
+            else {
+                setWait(true);
+            }
+        }
+        else {
+            setWait(true);
         }
     }
 }

@@ -11,10 +11,15 @@ public class Nurse extends HospitalStaff {
     public Nurse() {
         counter++;
         id = counter;
+        setAvailable(true);
     }
 
     public static int getCounter() {
         return counter;
+    }
+
+    public static void decreaseCounter() {
+        counter--;
     }
 
     public int getId() {
@@ -23,5 +28,6 @@ public class Nurse extends HospitalStaff {
 
     public void processPaperwork() {
         patient.setNurseFilled(true);
+        setAvailable(true);
     }
 }

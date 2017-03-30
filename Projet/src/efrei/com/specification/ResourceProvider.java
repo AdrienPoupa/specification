@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * The resource provider
+ * Buffer are not being used for now
  */
 public class ResourceProvider extends HospitalStaff {
     private Buffer b0;
@@ -14,10 +15,11 @@ public class ResourceProvider extends HospitalStaff {
     // Create new physicians, emergency rooms
     public static void offerResource() {
         // Create a few things
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             PhysicianContainer.add(new Physician());
             NurseContainer.add(new Nurse());
             EmergencyRoomContainer.add(new EmergencyRoom());
+            ExaminingRoomContainer.add(new ExaminingRoom());
         }
     }
 
@@ -41,6 +43,8 @@ public class ResourceProvider extends HospitalStaff {
         for (Nurse n : nurseList) {
             if (!n.isAvailable()) {
                 nurseTrimmedList.add(n);
+            } else {
+                Nurse.decreaseCounter();
             }
         }
 
@@ -57,6 +61,18 @@ public class ResourceProvider extends HospitalStaff {
         }
 
         EmergencyRoomContainer.setEmergencyRoomList(emergencyRoomTrimmedList);
+
+        // Remove all idle rooms
+        List<ExaminingRoom> examiningRoomList = ExaminingRoomContainer.getExaminingRoomList();
+        List<ExaminingRoom> examiningRoomTrimmedList = new ArrayList<>();
+
+        for (ExaminingRoom e : examiningRoomList) {
+            if (!e.isAvailable()) {
+                examiningRoomTrimmedList.add(e);
+            }
+        }
+
+        ExaminingRoomContainer.setExaminingRoomList(examiningRoomTrimmedList);
     }
 
     public static boolean emergencyRoomAvailable() {

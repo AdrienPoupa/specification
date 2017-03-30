@@ -34,4 +34,10 @@ public class UnitTests {
         patient.setBirthDate("01/01/1985");
         Assert.assertEquals("01/01/1985", "01/01/1985", patient.getBirthDate());
     }
+
+    @Test
+    public void testLastName() {
+        patient.setLastName("Test");
+        Assert.assertEquals("Test", "Test", patient.getLastName());
+    }
 }

@@ -5,7 +5,7 @@ package efrei.com.specification;
  * Singleton
  */
 public class Receptionist extends HospitalStaff {
-    private static int NUMBER_OF_PATIENTS = 10;
+    public static int NUMBER_OF_PATIENTS = 10;
     private static Receptionist INSTANCE = null;
 
     /**
@@ -13,10 +13,14 @@ public class Receptionist extends HospitalStaff {
      */
     private Receptionist() {}
 
+    /**
+     * Get the instance shared among the code
+     * @return Receptionist current receptionist
+     */
     public static Receptionist getInstance()
     {
-        if (INSTANCE == null)
-        { 	INSTANCE = new Receptionist();
+        if (INSTANCE == null) {
+            INSTANCE = new Receptionist();
         }
         return INSTANCE;
     }
@@ -45,9 +49,8 @@ public class Receptionist extends HospitalStaff {
             waitingTime += 1;
         }
 
-        // if number of current patients > ... and room available
-        // waiting
-        if (roomAvailable){
+        // if number of current patients > NUMBER_OF_PATIENTS and room not available
+        if (!roomAvailable){
             waitingTime += 1;
         }
 

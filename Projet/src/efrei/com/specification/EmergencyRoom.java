@@ -13,6 +13,7 @@ public class EmergencyRoom {
     public EmergencyRoom() {
         counter++;
         id = counter;
+        setAvailable(true);
     }
 
     public static int getCounter() {

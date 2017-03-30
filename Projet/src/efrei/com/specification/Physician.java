@@ -11,6 +11,7 @@ public class Physician extends HospitalStaff {
     public Physician() {
         counter++;
         id = counter;
+        setAvailable(true);
     }
 
     public static int getCounter() {
@@ -23,5 +24,6 @@ public class Physician extends HospitalStaff {
 
     public void examineTreatPatient() {
         patient.setExamined(true);
+        setAvailable(true);
     }
 }

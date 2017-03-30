@@ -1,9 +1,29 @@
 package efrei.com.specification;
 
 /**
- * Created by Adrien on 28/03/2017.
+ * The responsible of the service
+ * Singleton
  */
 public class ServiceResponsable extends HospitalStaff {
+    private static ServiceResponsable INSTANCE = null;
+
+    /**
+     * Private receptionist
+     */
+    private ServiceResponsable() {}
+
+    /**
+     * Get the instance shared among the code
+     * @return ServiceResponsable current receptionist
+     */
+    public static ServiceResponsable getInstance()
+    {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceResponsable();
+        }
+        return INSTANCE;
+    }
+    
     public void askForMoreResource() {
         ResourceProvider.offerResource();
     }

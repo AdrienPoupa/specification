@@ -13,6 +13,7 @@ public class ExaminingRoom {
     public ExaminingRoom() {
         counter++;
         id = counter;
+        setAvailable(true);
     }
 
     public static int getCounter() {
