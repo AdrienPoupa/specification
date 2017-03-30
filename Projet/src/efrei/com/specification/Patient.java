@@ -84,6 +84,7 @@ public class Patient extends Person {
     }
 
     public void setPhysician(Physician physician) {
+        physician.setPatient(this);
         this.physician = physician;
     }
 
@@ -132,9 +133,8 @@ public class Patient extends Person {
         }
 
         // Enter the free room
-        EmergencyRoom freeRoom = ResourceProvider.getEmergencyRoomAvailable();
-        if (freeRoom != null) {
-            enterEmergencyRoom(freeRoom);
+        if (ResourceProvider.emergencyRoomAvailable()) {
+            enterEmergencyRoom(ResourceProvider.getEmergencyRoomAvailable());
         }
     }
 
@@ -158,18 +158,21 @@ public class Patient extends Person {
         setPaper(true);
 
         // Get an available nurse
-        Nurse freeNurse = ResourceProvider.getNurseAvailable();
-        if (freeNurse != null) {
-            setNurse(freeNurse);
+        if (ResourceProvider.nurseAvailable()) {
+            setNurse(ResourceProvider.getNurseAvailable());
         }
 
         // Then the nurse fills the paper
         nurse.processPaperwork();
 
         // Enter the free room
-        ExaminingRoom freeRoom = ResourceProvider.getExaminingRoomAvailable();
-        if (freeRoom != null) {
-            enterExaminingRoom(freeRoom);
+        if (ResourceProvider.examiningRoomAvailable()) {
+            enterExaminingRoom(ResourceProvider.getExaminingRoomAvailable());
+        }
+
+        // Get a doctor
+        if (ResourceProvider.physicianAvailable()) {
+            setPhysician(ResourceProvider.getPhysicianAvailable());
         }
     }
 }

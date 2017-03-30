@@ -1,16 +1,13 @@
 package efrei.com.specification.tests;
 
-import com.sun.org.apache.regexp.internal.RE;
 import efrei.com.specification.*;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * Validation tests
  * We test the whole system: when is a patient cured?
  * We test a whole scenario
+ * Everything is in a single function otherwise we don't share instance states
  */
 public class ValidationTests {
     private Receptionist receptionist;
@@ -58,7 +55,7 @@ public class ValidationTests {
     }
 
     @Test
-    public void testCheckIn() {
+    public void testValidation() {
         // The patient checks in
         patient.checkIn();
 
@@ -70,11 +67,8 @@ public class ValidationTests {
 
         // Everything is empty, make sure he is in the first emergency room
         Assert.assertEquals(patient.getEmergencyRoom().getId(), 1);
-    }
 
-    @Test
-    public void testFillPaper() {
-        // The patient fills the paper in
+        // The patient fills the paper
         patient.fillPaper();
 
         // We have the first nurse who is available
@@ -88,5 +82,24 @@ public class ValidationTests {
 
         // Everything is empty, make sure he is in the first exam room
         Assert.assertEquals(patient.getExaminingRoom().getId(), 1);
+
+        // He gets the 1st physician
+        Assert.assertEquals(patient.getPhysician().getId(), 1);
+
+        // Now the physician examines and treats the patient
+        physician.examineTreatPatient();
+
+        // Patient has been treated
+        Assert.assertTrue(patient.isExamined());
+
+        // The patient checks out
+        patient.checkOut();
+
+        // Everything is reset
+        Assert.assertNull(patient.getPhysician());
+        Assert.assertNull(patient.getExaminingRoom());
+        Assert.assertNull(patient.getNurse());
+        Assert.assertNull(patient.getReceptionist());
+        Assert.assertNull(patient.getEmergencyRoom());
     }
 }

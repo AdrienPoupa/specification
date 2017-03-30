@@ -21,7 +21,7 @@ public class Physician extends HospitalStaff {
         return id;
     }
 
-    public void examinePatient() {
+    public void examineTreatPatient() {
         patient.setExamined(true);
     }
 }
