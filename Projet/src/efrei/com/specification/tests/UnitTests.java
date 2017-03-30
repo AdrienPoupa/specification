@@ -1,7 +1,5 @@
 package efrei.com.specification.tests;
 
-import com.sun.media.sound.EmergencySoundbank;
-import efrei.com.specification.EmergencyRoom;
 import efrei.com.specification.Patient;
 import org.junit.After;
 import org.junit.Assert;
@@ -10,7 +8,7 @@ import org.junit.Test;
 
 /**
  * Unit tests
- * Isol 1 classe
+ * We isolate a single class
  */
 public class UnitTests {
     private Patient patient;

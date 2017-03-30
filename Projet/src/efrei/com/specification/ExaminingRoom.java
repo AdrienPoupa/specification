@@ -6,6 +6,23 @@ package efrei.com.specification;
 public class ExaminingRoom {
     private boolean isAvailable;
 
+    private static int counter;
+
+    private int id;
+
+    public ExaminingRoom() {
+        counter++;
+        id = counter;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public boolean isAvailable() {
         return isAvailable;
     }

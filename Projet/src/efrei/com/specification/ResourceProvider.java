@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Adrien on 28/03/2017.
+ * The resource provider
  */
 public class ResourceProvider extends HospitalStaff {
     private Buffer b0;
@@ -16,6 +16,7 @@ public class ResourceProvider extends HospitalStaff {
         // Create a few things
         for (int i = 0; i < 2; i++) {
             PhysicianContainer.add(new Physician());
+            NurseContainer.add(new Nurse());
             EmergencyRoomContainer.add(new EmergencyRoom());
         }
     }
@@ -32,6 +33,18 @@ public class ResourceProvider extends HospitalStaff {
         }
 
         PhysicianContainer.setPhysicianList(physicianTrimmedList);
+
+        // Remove all idle nurses
+        List<Nurse> nurseList = NurseContainer.getNurseList();
+        List<Nurse> nurseTrimmedList = new ArrayList<>();
+
+        for (Nurse n : nurseList) {
+            if (!n.isAvailable()) {
+                nurseTrimmedList.add(n);
+            }
+        }
+
+        NurseContainer.setNurseList(nurseTrimmedList);
 
         // Remove all idle rooms
         List<EmergencyRoom> emergencyRoomList = EmergencyRoomContainer.getEmergencyRoomList();
@@ -78,6 +91,18 @@ public class ResourceProvider extends HospitalStaff {
         return PhysicianContainer.getPhysicianList()
                 .stream()
                 .filter(Physician::isAvailable)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static boolean nurseAvailable() {
+        return getNurseAvailable() != null;
+    }
+
+    public static Nurse getNurseAvailable() {
+        return NurseContainer.getNurseList()
+                .stream()
+                .filter(Nurse::isAvailable)
                 .findFirst()
                 .orElse(null);
     }

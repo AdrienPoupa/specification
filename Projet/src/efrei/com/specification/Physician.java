@@ -4,23 +4,21 @@ package efrei.com.specification;
  * Created by Adrien on 28/03/2017.
  */
 public class Physician extends HospitalStaff {
-    private boolean isAvailable;
-    private Patient patient;
+    private static int counter;
 
-    public boolean isAvailable() {
-        return isAvailable;
+    private int id;
+
+    public Physician() {
+        counter++;
+        id = counter;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public static int getCounter() {
+        return counter;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public int getId() {
+        return id;
     }
 
     public void examinePatient() {

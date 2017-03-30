@@ -4,14 +4,21 @@ package efrei.com.specification;
  * A nurse
  */
 public class Nurse extends HospitalStaff {
-    private Patient patient;
+    private static int counter;
 
-    public Patient getPatient() {
-        return patient;
+    private int id;
+
+    public Nurse() {
+        counter++;
+        id = counter;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public static int getCounter() {
+        return counter;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void processPaperwork() {

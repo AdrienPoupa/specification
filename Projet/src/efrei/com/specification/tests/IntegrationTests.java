@@ -9,8 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by Adrien on 28/03/2017.
- * Intégration entre 2 classes
+ * We test the integration between 2 classes
  */
 public class IntegrationTests {
     private Patient patient;

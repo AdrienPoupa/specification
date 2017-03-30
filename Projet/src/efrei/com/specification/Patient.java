@@ -31,7 +31,6 @@ public class Patient extends Person {
     }
 
     public boolean isNurseFilled() {
-
         return nurseFilled;
     }
 
@@ -76,6 +75,7 @@ public class Patient extends Person {
     }
 
     public void setNurse(Nurse nurse) {
+        nurse.setPatient(this);
         this.nurse = nurse;
     }
 
@@ -92,27 +92,38 @@ public class Patient extends Person {
     }
 
     public void enterEmergencyRoom(EmergencyRoom emergencyRoom) {
+        emergencyRoom.setAvailable(false);
         this.emergencyRoom = emergencyRoom;
     }
 
     public void leaveEmergencyRoom() {
+        this.emergencyRoom.setAvailable(true);
         this.emergencyRoom = null;
     }
 
     public void enterExaminingRoom(ExaminingRoom examiningRoom) {
+        examiningRoom.setAvailable(false);
         this.examiningRoom = examiningRoom;
     }
 
     public void leaveExaminingRoom() {
+        this.examiningRoom.setAvailable(true);
         this.examiningRoom = null;
     }
 
+    /**
+     * Check in the hospital
+     */
     public void checkIn() {
+        // Set receptionist
+        setReceptionist(Receptionist.getInstance());
+
         // +1 patient in the hospital
         counter++;
 
         setCheckedIn(true);
 
+        // Get the waiting time
         int waitingTime = receptionist.checkResources();
 
         // Waiting time too long: we won't enter the emergency room
@@ -145,6 +156,12 @@ public class Patient extends Person {
     public void fillPaper() {
         // Patient fills his paper
         setPaper(true);
+
+        // Get an available nurse
+        Nurse freeNurse = ResourceProvider.getNurseAvailable();
+        if (freeNurse != null) {
+            setNurse(freeNurse);
+        }
 
         // Then the nurse fills the paper
         nurse.processPaperwork();
