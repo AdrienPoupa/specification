@@ -1,43 +1,43 @@
-p 100.0 150.0 patient 0 n
-t 25.0 150.0 t2 0 w n
-p 250.0 150.0 {check in} 0 n
-t 175.0 150.0 t3 0 w n
+p 100.0 150.0 {.} 0 n
+t 25.0 150.0 Initial n 0 w n {} ne
+p 250.0 150.0 { } 0 n
+t 175.0 150.0 {Arrival of patient} n 0 w n {} ne
 p 440.0 50.0 Nurse 5 n
-t 330.0 150.0 t4 0 w n
-p 410.0 150.0 paper 0 n
-t 180.0 240.0 t5 0 w n
-p 535.0 150.0 wait 0 n
-t 475.0 150.0 t6 0 w n
-p 335.0 270.0 compteur 5 s
-t 600.0 150.0 t7 0 w n
-p 675.0 150.0 {examining room} 0 n
+t 330.0 150.0 {Check in} n 0 w n {} ne
+p 410.0 150.0 {:} 0 n
+t 180.0 240.0 {Not enough room} s 0 w n {} ne
+p 535.0 150.0 {. } 0 n
+p 335.0 270.0 Count 5 s
+p 675.0 150.0 {  } 0 n
 p 600.0 255.0 {Room available} 3 w
-t 745.0 150.0 t8 0 w n
-p 815.0 150.0 treatment 0 n
+t 745.0 150.0 {Exam room} n 0 w n {} ne
+p 815.0 150.0 {   } 0 n
 p 745.0 260.0 Physician 2 s
-t 885.0 150.0 {check out} e 0 w n {} ne
-e t7 0.3074289577 56.64803615 Nurse 0.9875912248 64.19501538 1 n
-e {check out} 0.7315763483 129.8691649 {Room available} 0.8529348006 122.8006515 1 n
-e {check out} Physician 1 n
-e treatment {check out} 1 n
-e Physician t8 1 n
-e t8 treatment 1 n
-e {examining room} t8 1 n
-e t7 {examining room} 1 n
-e {Room available} t7 1 n
-e wait t7 1 n
-e t6 compteur 1 n
-e Nurse t6 1 n
-e t6 wait 1 n
-e paper t6 1 n
-e compteur t4 1 n
-e t4 paper 1 n
-e {check in} t4 1 n
-e t5 patient 1 n
-e {check in} t5 1 n
-e t3 {check in} 1 n
-e patient t3 1 n
-e t2 patient 1 n
+t 475.0 150.0 {Fills paper} s 0 w n {} ne
+t 600.0 150.0 Wait n 0 w n {} ne
+t 885.0 150.0 {Treatment or checkout??} e 0 w n {} ne
+e Wait 0.3074289577 56.64803615 Nurse 0.9875912248 64.19501538 1 n
+e {Treatment or checkout??} 0.7315763483 129.8691649 {Room available} 0.8529348006 122.8006515 1 n
+e {Treatment or checkout??} Physician 1 n
+e {   } {Treatment or checkout??} 1 n
+e Physician {Exam room} 1 n
+e {Exam room} {   } 1 n
+e {  } {Exam room} 1 n
+e Wait {  } 1 n
+e {Room available} Wait 1 n
+e {. } Wait 1 n
+e {Fills paper} Count 1 n
+e Nurse {Fills paper} 1 n
+e {Fills paper} {. } 1 n
+e {:} {Fills paper} 1 n
+e Count {Check in} 1 n
+e {Check in} {:} 1 n
+e { } {Check in} 1 n
+e {Not enough room} {.} 1 n
+e { } {Not enough room} 1 n
+e {Arrival of patient} { } 1 n
+e {.} {Arrival of patient} 1 n
+e Initial {.} 1 n
 h 1
 
 
