@@ -1,13 +1,13 @@
 LTL formula
 
 deadlock freeness :
-- <> dead
+<> dead
 
 Eventually examined by a doctor :
-<> 
+[] (patient => <> treatment)
 
 Each time a room is taken it will be eventually released :
 G(t7 => F checkout)
 
-[](t7 => () checkout)
+[](t7 => <> checkout)
 

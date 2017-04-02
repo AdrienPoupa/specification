@@ -1,43 +1,43 @@
 p 100.0 150.0 {.} 0 n
 t 25.0 150.0 Initial n 0 w n {} ne
 p 250.0 150.0 { } 0 n
-t 175.0 150.0 {Arrival of patient} n 0 w n {} ne
+t 175.0 150.0 ArrivalOfPatient n 0 w n {} ne
 p 440.0 50.0 Nurse 5 n
 t 330.0 150.0 {Check in} n 0 w n {} ne
 p 410.0 150.0 {:} 0 n
-t 180.0 240.0 {Not enough room} s 0 w n {} ne
+t 180.0 240.0 NotEnoughRoom s 0 w n {} ne
 p 535.0 150.0 {. } 0 n
 p 335.0 270.0 Count 5 s
 p 675.0 150.0 {  } 0 n
-p 600.0 255.0 {Room available} 3 w
-t 745.0 150.0 {Exam room} n 0 w n {} ne
+p 600.0 255.0 RoomAvailable 3 w
+t 745.0 150.0 Treatment n 0 w n {} ne
 p 815.0 150.0 {   } 0 n
 p 745.0 260.0 Physician 2 s
-t 475.0 150.0 {Fills paper} s 0 w n {} ne
+t 475.0 150.0 FillsPaper s 0 w n {} ne
 t 600.0 150.0 Wait n 0 w n {} ne
-t 885.0 150.0 {Treatment or checkout??} e 0 w n {} ne
-e Wait 0.3074289577 56.64803615 Nurse 0.9875912248 64.19501538 1 n
-e {Treatment or checkout??} 0.7315763483 129.8691649 {Room available} 0.8529348006 122.8006515 1 n
-e {Treatment or checkout??} Physician 1 n
-e {   } {Treatment or checkout??} 1 n
-e Physician {Exam room} 1 n
-e {Exam room} {   } 1 n
-e {  } {Exam room} 1 n
-e Wait {  } 1 n
-e {Room available} Wait 1 n
-e {. } Wait 1 n
-e {Fills paper} Count 1 n
-e Nurse {Fills paper} 1 n
-e {Fills paper} {. } 1 n
-e {:} {Fills paper} 1 n
-e Count {Check in} 1 n
-e {Check in} {:} 1 n
-e { } {Check in} 1 n
-e {Not enough room} {.} 1 n
-e { } {Not enough room} 1 n
-e {Arrival of patient} { } 1 n
-e {.} {Arrival of patient} 1 n
+t 885.0 150.0 Checkout n 0 w n {} ne
 e Initial {.} 1 n
+e {.} ArrivalOfPatient 1 n
+e ArrivalOfPatient { } 1 n
+e { } NotEnoughRoom 1 n
+e NotEnoughRoom {.} 1 n
+e { } {Check in} 1 n
+e {Check in} {:} 1 n
+e Count {Check in} 1 n
+e {:} FillsPaper 1 n
+e FillsPaper {. } 1 n
+e Nurse FillsPaper 1 n
+e FillsPaper Count 1 n
+e {. } Wait 1 n
+e RoomAvailable Wait 1 n
+e Wait {  } 1 n
+e {  } Treatment 1 n
+e Treatment {   } 1 n
+e Physician Treatment 1 n
+e {   } Checkout 1 n
+e Checkout Physician 1 n
+e Checkout 0.7315763483 129.8691649 RoomAvailable 0.8529348006 122.8006515 1 n
+e Wait 0.3074289577 56.64803615 Nurse 0.9875912248 64.19501538 1 n
 h 1
 
 
